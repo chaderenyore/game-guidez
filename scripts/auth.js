@@ -1,6 +1,6 @@
 // signup 
- const signupForm = document.querySelector('#signup-form') 
- signupForm.addEventListener('submit', (e) => {
+const signupForm = document.querySelector('#signup-form') 
+signupForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = signupForm['signup-email'].value;
       const password = signupForm['signup-password'].value;
@@ -13,4 +13,13 @@
        M.Modal.getInstance(modal).close();
        signupForm.reset()
      })
- })
+})
+
+// logout
+const logout = document.querySelector('#logout')
+logout.addEventListener('click', (event) => {
+      event.preventDefault();
+      auth.signOut().then(() => {
+            console.log('User signed out');
+      });
+});
