@@ -1,3 +1,8 @@
+// get data
+db.collection('guidez').get().then((snapshot) => {
+      setupGuides(snapshot.docs);
+})
+
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
       if (user) {
@@ -47,7 +52,5 @@ loginForm.addEventListener('submit', (e) => {
       const modal = document.querySelector('#modal-login');
       M.Modal.getInstance(modal).close();
       loginForm.reset()
-      })
-
-      
+      })  
 })
