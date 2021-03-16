@@ -11,6 +11,24 @@ auth.onAuthStateChanged(user => {
       }
 })
 
+// create new guide
+const createFORM = document.querySelector('#create-form');
+createFORM.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+
+      db.collection('guidez').add({
+            title: createFORM['title'].value,
+            content: createFORM['content'].value
+      }).then(() => {
+            //close the modal
+            const modal = document.querySelector('#modal-create');
+            M.Modal.getInstance(modal).close();
+            createFORM.reset()
+      }).catch((error) => {
+            console.log(error.message)
+      })
+})
+
 // signup 
 const signupForm = document.querySelector('#signup-form') 
 signupForm.addEventListener('submit', (e) => {
