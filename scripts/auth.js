@@ -1,13 +1,16 @@
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
+      console.log(user);
       if (user) {
-            db.collection('guidez').get().then((snapshot) => {
-                  setupGuides(snapshot.docs);
+            db.collection('guidez').onSnapshot((snapshot) => {
+                  setupGuides(snapshot.docs)
                   setupUI(user);
+            }).catch(err => {
+                  console.log(err.messsage);
             })
       } else {
             setupUI();
-            setupGuides([])
+            setupGuides([]);
       }
 })
 
@@ -26,8 +29,8 @@ createFORM.addEventListener('submit', (e) => {
             createFORM.reset()
       }).catch((error) => {
             console.log(error.message)
-      })
-})
+      });
+});
 
 // signup 
 const signupForm = document.querySelector('#signup-form') 
