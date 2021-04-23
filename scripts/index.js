@@ -5,10 +5,14 @@ const accountDetails = document.querySelector('.account-details');
 const setupUI = (user) => {
       if (user) {
             // display  acount info
-            const details = `
+            db.collection('users').doc(user.uid).get().then((doc) => {
+                  const details = `
                   <div>Loggged in as ${user.email}</div>
+                  <div>${doc.data().bio}</div>
             `
             accountDetails.innerHTML = details;
+            })
+            
             // toggle UI elements
             loggedInLinks.forEach(item => item.style.display = 'block');
             loggedOutLinks.forEach(item => item.style.display = 'none');
